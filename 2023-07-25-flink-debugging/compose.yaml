@@ -1,0 +1,21 @@
+services:
+  jobmanager:
+    image: flink:1.17.1
+    ports:
+      - 8081:8081
+      - 5005:5005
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: jobmanager
+        parallelism.default: 1
+    command: jobmanager
+
+  taskmanager:
+    image: flink:1.17.1
+    ports:
+      - 5006:5006
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: jobmanager
+        parallelism.default: 1
+    command: taskmanager
